@@ -3,37 +3,83 @@
 using namespace std;
 
 
-class tab_dynamic
+class Tablica
 {
 public:
-	void POKAZ_ROZMIAR(tab_dynamic tab);  						//zwraca rozmiar
-	tab_dynamic ZAPISZ(int indeks , int wartosc);				//zapisje w tablicy
-	tab_dynamic ODCZYTAJ(int indeks , int wartosc);				//odczytuje z tablicy
-
+	//metody
+	int zwroc_rozmiar();  						//zwraca rozmiar
+	void zapisz(int indeks , int wartosc);				//zapisje w tablicy
+	void wypisz(int indeks);			//odczytuje z tablicy
+	void wypisz_tablice ();
+	Tablica(int rozmiar);
 private:
-	int	AKTUALNY_ROZMIAR  ;										//aktualny rozmiar tablicy
-	int TABLICA [];						
-	tab_dynamic POWIEKSZ(tab_dynamic tab, int rozmiar);			//powieksza tablice	
-	tab_dynamic POMNIEJSZ(tab_dynamic tab, int rozmiar);		//zmiejsza tablice
+	//atrybuty
+	int	aktualny_rozmiar;
+	int *tablica;
+	//metody
+//	Tablica powieksz(Tablica tab, int rozmiar);			//powieksza tablice	
+//	Tablica pomniejsz(Tablica tab, int rozmiar);		//zmiejsza tablice
 
 };
 
 
-
-void tab_dynamic :: POKAZ_ROZMIAR ( tab_dynamic tab ){
+Tablica::Tablica(int rozmiar){
+	tablica = new int[rozmiar];
+	aktualny_rozmiar=rozmiar;
 	
-	cout << "Aktualny rozmiar tablicy to: " << tab.AKTUALNY_ROZMIAR << endl;
+}
+
+int Tablica :: zwroc_rozmiar (){
+	//cout << "Aktualny rozmiar tablicy to: " << aktualny_rozmiar << endl;
+	return aktualny_rozmiar;
 }
 
 
-//tab_dynamic tab_dynamic :: ZAPISZ (int indeks, int wartosc){
+void Tablica::zapisz (int indeks , int wartosc){
+	tablica[indeks] = wartosc;
+}
+
+void Tablica::wypisz (int indeks){
+	int x;
+	x=tablica[indeks];
+	cout << x << endl;
+}
 
 
+
+void Tablica::wypisz_tablice (){
+	for (int i = 0; i < aktualny_rozmiar; ++i)
+	{
+		cout <<tablica[i] << "\t" ;
+	}
+	cout << endl;
+}
 
 
 int main(){
+	//testowanie 
+	Tablica t1(10);
+	int ROZMIAR = t1.zwroc_rozmiar();
+ 	cout << "ROZMIAR : " << ROZMIAR << endl;
 
-	tab_dynamic *tabliczka = new tab_dynamic[10];
+	for (int i = 0; i < t1.zwroc_rozmiar() ; ++i)
+	{
+		cout << "Element "<< i << " zapisuje ";
+		t1.zapisz(i , 5);
+		cout << endl;
+	}
+
+	t1.wypisz_tablice();
+
+	t1.wypisz(7);
+	t1.wypisz(8);
+	t1.wypisz(9);
+
+	t1.wypisz(10);
+	t1.wypisz(32);
+	
+	cout<< "THE END"<< endl;
+
 
 	return 0;
 }
@@ -49,7 +95,7 @@ int main(){
 
 N                |     T
 potegi dziesiatki|	czas wypelniania
-to 10 elementow
+to 10 elementow	 |
 
 tworzone tablice maja rozmiar 10
 
