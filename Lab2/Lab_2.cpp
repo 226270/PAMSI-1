@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 using namespace std;
 
 
@@ -8,43 +9,50 @@ class Tablica
 public:
 	//metody
 	int zwroc_rozmiar();  						//zwraca rozmiar
-	void zapisz(int indeks , int wartosc);				//zapisje w tablicy
-	void wypisz(int indeks);			//odczytuje z tablicy
-	void wypisz_tablice ();
+	void zapisz(int indeks , int wartosc);		//zapisje w tablicy
+	int wypisz(int indeks);					//odczytuje z tablicy (jeden element)
+	void wypisz_tablice ();						//wypisuje calo tablice
 	Tablica(int rozmiar);
 private:
 	//atrybuty
 	int	aktualny_rozmiar;
 	int *tablica;
 	//metody
-//	Tablica powieksz(Tablica tab, int rozmiar);			//powieksza tablice	
-//	Tablica pomniejsz(Tablica tab, int rozmiar);		//zmiejsza tablice
+	int * powieksz(int stara_tablica[], int nowy_rozmiar);			//powieksza tablice	
+//	Tablica pomniejsz(int stara_tablica[]] int rozmiar);		//zmiejsza tablice
 
 };
 
 
 Tablica::Tablica(int rozmiar){
-	tablica = new int[rozmiar];
-	aktualny_rozmiar=rozmiar;
-	
+	if ( rozmiar > 0 ){
+		tablica = new int[rozmiar];
+		aktualny_rozmiar=rozmiar;
+	}
+	else 
+		cout << "NIEPOPRAWNY ROZMIAR !" << endl;	
 }
 
 int Tablica :: zwroc_rozmiar (){
-	//cout << "Aktualny rozmiar tablicy to: " << aktualny_rozmiar << endl;
-	return aktualny_rozmiar;
+	if ( aktualny_rozmiar > 0 ){
+		return aktualny_rozmiar;
+	}
+	else{ 
+		cout << "NIEPOPRAWNY ROZMIAR !" << endl;
+		return 0;
+	}
 }
 
 
-void Tablica::zapisz (int indeks , int wartosc){
-	tablica[indeks] = wartosc;
+int Tablica::wypisz (int indeks){
+	if ( indeks < aktualny_rozmiar){
+		return tablica[indeks];
+	}
+	else{ 
+		cout << "NIE MOZNA ODCZYTAC || WYJECHALES POZA TABLICE" << endl;
+		return 0;
+	} 
 }
-
-void Tablica::wypisz (int indeks){
-	int x;
-	x=tablica[indeks];
-	cout << x << endl;
-}
-
 
 
 void Tablica::wypisz_tablice (){
@@ -56,31 +64,53 @@ void Tablica::wypisz_tablice (){
 }
 
 
+void Tablica::zapisz (int indeks , int wartosc){
+	if ( indeks < aktualny_rozmiar)  //jesli wszsytko ok
+		tablica[indeks] = wartosc;
+	else if (indeks < 0){ // jesli poza tablica
+		cout << "NIE MOZNA ZAPISAC || WYJECHALES POZA TABLICE" << endl;
+	}
+	else {
+		tablica = powieksz(tablica, 2*indeks);
+		tablica[indeks] = wartosc;
+	}
+}
+
+int * Tablica::powieksz(int stara_tablica[], int nowy_rozmiar){  //nowy_rozmiar to rozmiar jaki 
+	int * nowa_tablica = new int[nowy_rozmiar];					   //jaki chce osiagnac po powiekszeniu
+	aktualny_rozmiar = nowy_rozmiar;
+
+	for(int i = 0; i<aktualny_rozmiar; i++){
+		nowa_tablica[i] = stara_tablica[i];
+	}
+
+	delete [] stara_tablica;
+
+	return nowa_tablica;
+}
+
+
 int main(){
 	//testowanie 
 	Tablica t1(10);
-	int ROZMIAR = t1.zwroc_rozmiar();
+	int ile_wpisac = 40960;
+	int ROZMIAR;
+	
+	ROZMIAR = t1.zwroc_rozmiar();
  	cout << "ROZMIAR : " << ROZMIAR << endl;
 
-	for (int i = 0; i < t1.zwroc_rozmiar() ; ++i)
+
+	for (int i = 0; i < ile_wpisac ; ++i)
 	{
-		cout << "Element "<< i << " zapisuje ";
-		t1.zapisz(i , 5);
-		cout << endl;
+		t1.zapisz(i , 7);
 	}
 
+
 	t1.wypisz_tablice();
-
-	t1.wypisz(7);
-	t1.wypisz(8);
-	t1.wypisz(9);
-
-	t1.wypisz(10);
-	t1.wypisz(32);
+	ROZMIAR = t1.zwroc_rozmiar();
+ 	cout << "ROZMIAR : " << ROZMIAR << endl;
 	
 	cout<< "THE END"<< endl;
-
-
 	return 0;
 }
 
