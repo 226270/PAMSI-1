@@ -1,3 +1,8 @@
+// Rafał Perużyński
+// 226266
+// PAMSI / Lab2
+
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -10,20 +15,26 @@ public:
 	//metody
 	int zwroc_rozmiar();  						//zwraca rozmiar
 	void zapisz(int indeks , int wartosc);		//zapisje w tablicy
-	int wypisz(int indeks);					//odczytuje z tablicy (jeden element)
+	int wypisz(int indeks);						//odczytuje z tablicy (jeden element)
 	void wypisz_tablice ();						//wypisuje calo tablice
+	//konstruktor
 	Tablica(int rozmiar);
+
 private:
 	//atrybuty
 	int	aktualny_rozmiar;
 	int *tablica;
 	//metody
 	int * powieksz(int stara_tablica[], int nowy_rozmiar);			//powieksza tablice	
-//	Tablica pomniejsz(int stara_tablica[]] int rozmiar);		//zmiejsza tablice
+//	int * pomniejsz(int stara_tablica[]] int rozmiar);		         //zmiejsza tablice
 
 };
 
 
+
+//             ///////////////////
+//                CIAŁA METOD
+//			/////////////////////////
 Tablica::Tablica(int rozmiar){
 	if ( rozmiar > 0 ){
 		tablica = new int[rozmiar];
@@ -71,18 +82,18 @@ void Tablica::zapisz (int indeks , int wartosc){
 		cout << "NIE MOZNA ZAPISAC || WYJECHALES POZA TABLICE" << endl;
 	}
 	else {
-		tablica = powieksz(tablica, 2*indeks);
+		tablica = powieksz(tablica, indeks*2);
 		tablica[indeks] = wartosc;
 	}
 }
 
 int * Tablica::powieksz(int stara_tablica[], int nowy_rozmiar){  //nowy_rozmiar to rozmiar jaki 
 	int * nowa_tablica = new int[nowy_rozmiar];					   //jaki chce osiagnac po powiekszeniu
-	aktualny_rozmiar = nowy_rozmiar;
-
+	
 	for(int i = 0; i<aktualny_rozmiar; i++){
 		nowa_tablica[i] = stara_tablica[i];
 	}
+	aktualny_rozmiar = nowy_rozmiar;
 
 	delete [] stara_tablica;
 
@@ -90,43 +101,42 @@ int * Tablica::powieksz(int stara_tablica[], int nowy_rozmiar){  //nowy_rozmiar 
 }
 
 
+
+
+/////////////////////////////////////////////////////////////
 int main(){
 	//testowanie 
 	Tablica t1(10);
-	int ile_wpisac = 40960;
+	int ile_wpisac = 1000000; //ile elementow chce wpisac do tablicy
 	int ROZMIAR;
 	
+	//sprawdzam czy poczatkowy rozmiar na pewno jest rowny 10
 	ROZMIAR = t1.zwroc_rozmiar();
  	cout << "ROZMIAR : " << ROZMIAR << endl;
 
+	double roznica;
+	cout.setf(ios::fixed); //notacja zwykla, czyli nie wywali wyniku typu 1.175000e+003
+	cout.precision(8); //liczba miejsc po przecinku, dokladnosc naszego wyniku
+	clock_t start, koniec; //inicjacja zmiennych zegarowych
 
+	start=clock(); //zapisanie czasu startu mierzenia
+
+
+
+	//wypelnianie tablicy o kolejne elementy
 	for (int i = 0; i < ile_wpisac ; ++i)
 	{
 		t1.zapisz(i , 7);
 	}
 
 
-	t1.wypisz_tablice();
+	//sprawdzam rozmiar tablicy po uzupelnieniu
 	ROZMIAR = t1.zwroc_rozmiar();
  	cout << "ROZMIAR : " << ROZMIAR << endl;
+
+ 	koniec=clock();//zapisanie konca mierzenia
+	roznica=(koniec-start)/(double)CLOCKS_PER_SEC;//obliczenie roznicy, czyli czasu wykonania
+	cout<<"Czas wykonania: "<<roznica<<endl;
 	
-	cout<< "THE END"<< endl;
 	return 0;
 }
-
-
-
-
-
-
-/*
-
- w domu sprawdzic jaka roznica jak zwiekszam o 1 albo jak wiekszam dwukrottnie
-
-N                |     T
-potegi dziesiatki|	czas wypelniania
-to 10 elementow	 |
-
-tworzone tablice maja rozmiar 10
-
-*/
