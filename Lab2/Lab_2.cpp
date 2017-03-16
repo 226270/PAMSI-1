@@ -82,7 +82,7 @@ void Tablica::zapisz (int indeks , int wartosc){
 		cout << "NIE MOZNA ZAPISAC || WYJECHALES POZA TABLICE" << endl;
 	}
 	else {
-		tablica = powieksz(tablica, indeks*2);
+		tablica = powieksz(tablica, indeks*2); // TUTAJ WSPISUJESZ ALBO indeks+1 ALBO indeks*2
 		tablica[indeks] = wartosc;
 	}
 }
