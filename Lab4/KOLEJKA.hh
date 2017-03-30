@@ -1,11 +1,8 @@
 #ifndef KOLEJKA_HH
 #define KOLEJKA_HH
 
-#include <iostream>
 
-class iKolejka {
-
-
+class Kolejka : public iKolejka {
 public:
 
 	void push( int Element); //dodaje element na tyl Kolejki

@@ -1,11 +1,8 @@
 #ifndef LISTA_HH
 #define LISTA_HH
 
-#include <iostream>
 
-class iLista {
-
-
+class Lista : public iLista {
 public:
 
 	void add(int Element , int Pozycja);  //dodaje element do listy

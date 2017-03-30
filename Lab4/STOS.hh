@@ -1,11 +1,9 @@
 #ifndef STOS_HH
-#define STOS_HH
-
-#include <iostream>
-
-class Stos {
+#define STOS_HH 
 
 
+
+class Stos : public iStos {
 public:
 
 	void push( int Element); //dodaje element na gore stosu	
