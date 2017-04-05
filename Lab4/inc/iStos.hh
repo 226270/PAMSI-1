@@ -11,7 +11,7 @@ public:
 	virtual void pop() = 0;
 	virtual void size() = 0;
 	virtual void show() = 0;
-	virtual void find() = 0;
+	virtual void find(int Szukana) = 0;
 };
 
 #endif

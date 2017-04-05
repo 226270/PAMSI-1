@@ -1,12 +1,12 @@
 #include <iostream>
 #include <cstdlib>
-#include "STOS.hh"
+#include "Stos.hh"
 
 
 using namespace std;	
 
-Stos::Stos(){  //konstruktor
-	ROZMIAR = 0 ;
+Stos::Stos(){  						//konstruktor
+	ROZMIAR = 0;
 	MOJ_STOS = new int [ROZMIAR];
 }
 
@@ -14,7 +14,7 @@ Stos::Stos(){  //konstruktor
 void Stos::push(){   //dodaje element na gore stosu	
 
  	ROZMIAR++;
- 	int NOWY_STOS = new int [ROZMIAR];
+ 	int *NOWY_STOS = new int [ROZMIAR];
 	 	
  	for (int i = 0; i < ROZMIAR-1; ++i){
  		NOWY_STOS[i] = MOJ_STOS[i];
@@ -30,7 +30,7 @@ void Stos::push(){   //dodaje element na gore stosu
 void Stos::pop(){	 //usuwa element z gory stosu
     
     if (ROZMIAR>0){
-        int NOWY_STOS = new int [ROZMIAR-1];
+        int *NOWY_STOS = new int [ROZMIAR-1];
 	 	
 	 	for (int i = 0; i < ROZMIAR-1; ++i){
 	 		NOWY_STOS[i] = MOJ_STOS[i];
@@ -55,7 +55,7 @@ void Stos::size(){				 			//wyswietla aktalny rozmiar stosu
 
 ////////////////////////////////////////////////////////////////////
 void Stos::show(){							//wyswietla stos
-	cout << " Kolejne elementy stosu to : "<<endl;
+	cout << "Kolejne elementy stosu to : "<<endl;
 	for(int i=0 ; i < ROZMIAR ; i++){
 		cout << MOJ_STOS[i] << " ";
 	}
@@ -64,12 +64,12 @@ void Stos::show(){							//wyswietla stos
 
 ///////////////////////////////////////////////////////////////////
 void Stos::find(int Szukana){
-	if (MOJ_STOS[i]==Szukana){
+	if (MOJ_STOS[ROZMIAR-1]==Szukana){
 		cout << "Wartosc zostala odnaleziona"<<endl;
 	}
 	else{
 		pop();
-		find(int Szukana);
+		find(Szukana);
 	}
 }
 
@@ -77,12 +77,12 @@ void Stos::find(int Szukana){
 ////////////////////////////////////////////////////////////////
 void Stos::wykonaj_test(){			//procedura testowa
 
-	int ile_wpisac;
-	int poszukiwana;
+	int ile_wpisac = 100000;
+	//int poszukiwana;
 
-	cout << "\nWitaj, oto test dla typu STOS";
-	cout << "\nPodaj ile wpisac do stosu";
-	cin >> ile_wpisac;
+	//cout << "\nWitaj, oto test dla typu STOS";
+	//cout << "\nPodaj ile wpisac do stosu  ";
+	//cin >> ile_wpisac;
 	
 	for (int i = 0; i < ile_wpisac; ++i)
 	{
@@ -91,9 +91,12 @@ void Stos::wykonaj_test(){			//procedura testowa
 
 	size();
 
-	cout << "Jakiej wartosci szukasz? :"<<endl;
-	cin >> poszukiwana ;
-	find(poszukiwana);
+	//show();
+
+	//cout << "\nJakiej wartosci szukasz? :"<<endl;
+	//cin >> poszukiwana ;
+	//find(poszukiwana);
+	find(1);
 
 	size();
 }			 

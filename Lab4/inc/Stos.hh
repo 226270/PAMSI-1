@@ -8,10 +8,12 @@
 class Stos : public iStos ,
 			 public iTestowany {
 public:
+	Stos();
+
 	void push();			 //dodaje element na gore stosu	
 	void pop();				 //usuwa element z gory stosu
 	void size();		     //pokazuje aktalny rozmiar stosu
-	void find();			 //szuka elementu w stosie
+	void find(int Szukana);	 //szuka elementu w stosie
 	void show();			//wyswietla stos
 	
 	void wykonaj_test();	//procedura testowa

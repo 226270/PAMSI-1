@@ -8,11 +8,13 @@
 class Lista : public iLista ,
 			  public iTestowany {
 public:
-	void add(int Element , int Pozycja);  //dodaje element do listy
-	void remove(int Pozycja);			  //usuwa element z listy
-	int  get(int Pozycja);			   	  //zwraca wartosc (int)
-	int  size();				 	 	  //zwraca aktalny rozmiar listy
-	int  find(int Szukana_wartosc);		  //zwraca pozycje szukanej wartosci 
-}
+	void add();  				//dodaje element do listy
+	void remove();			  	//usuwa element z listy
+	void size();		 	 	  //zwraca aktalny rozmiar listy
+	void find();				  //zwraca pozycje szukanej wartosci 
+
+	void wykonaj_test();		//procedura testowa
+
+};
 
 #endif

@@ -16,6 +16,6 @@ public:
 
 	void wykonaj_test();	 //procedura testowa
 
-}
+};
 
 #endif

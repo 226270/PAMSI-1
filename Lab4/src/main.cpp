@@ -20,7 +20,7 @@ int main(){
 
 
 	// PROCEDURA TESTOWA
-	Stoper.ZmierzCzas(S1 , 3);
+	Stoper.ZmierzCzas(S1);
 	
 	return 0;
 }

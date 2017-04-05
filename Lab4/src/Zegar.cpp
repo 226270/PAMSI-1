@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "ZEGAR.hh"
+#include "Zegar.hh"
 using namespace std;	
 
 
@@ -22,13 +22,10 @@ void Zegar::IleTrwalo(){
 	cout<<"Czas wykonania: "<<czas_pomiaru<<endl;		  						 //wyswietl czs wykonania	
 }
 
-void Zegar::ZmierzCzas(iTestowany &Obiekt, int IloscPowtorzen){
-	
-	for (int i = 0; i < IloscPowtorzen; ++i){
+void Zegar::ZmierzCzas(iTestowany &Obiekt){
 		CzasStart();
 		Obiekt.wykonaj_test();
 		CzasStop();
-		cout << "Pomiar nr: " << i << endl;
-		IleTrwalo();
-	}
+		IleTrwalo();	
 }
+
