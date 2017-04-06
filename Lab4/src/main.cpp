@@ -5,6 +5,7 @@
 
 #include "Zegar.hh"
 #include "Stos.hh"
+#include "Kolejka.hh"
 
 using namespace std;
 
@@ -16,11 +17,11 @@ int main(){
 	// TWORZE ZMIENNA DO POMIARU CZASU
 	Zegar Stoper;
 	// TWORZE OBIEKT
-	Stos S1;
+	Stos TestowanyObiekt;
 
 
 	// PROCEDURA TESTOWA
-	Stoper.ZmierzCzas(S1);
+	Stoper.ZmierzCzas(TestowanyObiekt);
 	
 	return 0;
 }
