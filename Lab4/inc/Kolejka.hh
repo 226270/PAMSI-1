@@ -8,18 +8,21 @@
 class Kolejka : public iKolejka,
 				public iTestowany {
 public:
-	Kolejka();				 //konstruktor
+	Kolejka(int rozmiar);				 //konstruktor
 
-	void push();			 //dodaje element na tyl Kolejki
+	void push(int wartosc);			 //dodaje element na tyl Kolejki
 	void pop();				 //usuwa element z przodu Kolejki
 	void size();			 //zwraca aktalny rozmiar kolejki
 	void find(int Szukana);			 //szuka elementu w kolejce
 	void show();			 //wyswietla stos
-
-	void wykonaj_test();	 //procedura testowa
+	int pierwszy();
+	void wykonaj_test(int ilosc);	 //procedura testowa
 private:
 	int *MOJA_KOLEJKA;
 	int ROZMIAR;
+	int GLOWA;
+	int OGON;
+	int DLUGOSC;
 };
 
 #endif

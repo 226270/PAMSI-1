@@ -19,12 +19,12 @@ void Zegar::CzasStop(){
 
 void Zegar::IleTrwalo(){
 	czas_pomiaru=(koniec_pomiaru - poczatek_pomiaru)/(double)CLOCKS_PER_SEC;     //obliczenie roznicy, czyli Czasu wykonania
-	cout<<"Czas wykonania: "<<czas_pomiaru<<endl;		  						 //wyswietl czs wykonania	
+	cout<<czas_pomiaru<<endl;		  						 //wyswietl czs wykonania	
 }
 
-void Zegar::ZmierzCzas(iTestowany &Obiekt){
+void Zegar::ZmierzCzas(iTestowany &Obiekt,int ilosc){
 		CzasStart();
-		Obiekt.wykonaj_test();
+		Obiekt.wykonaj_test(ilosc);
 		CzasStop();
 		IleTrwalo();	
 }

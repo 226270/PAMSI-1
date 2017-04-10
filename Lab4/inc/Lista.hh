@@ -8,13 +8,21 @@
 class Lista : public iLista ,
 			  public iTestowany {
 public:
-	void add();  				//dodaje element do listy
-	void remove();			  	//usuwa element z listy
-	void size();		 	 	  //zwraca aktalny rozmiar listy
-	void find();				  //zwraca pozycje szukanej wartosci 
+	void add(int wartosc);  	//dodaje element do listy
+	void remove();	//usuwa element z listy
+	int size();   //zwraca aktalny rozmiar listy
+	void find(int Szkana);	  
+	void wykonaj_test(int ilosc);		//procedura testowa
 
-	void wykonaj_test();		//procedura testowa
-
+	Lista();
+private:
+	struct Element{
+		Element *nastepny;
+		int wartosc;
+		Element(){nastepny = NULL;}
+	};		
+	Element *pierwszy; //wskaznik na pierwszy element
+	int rozmiar;
 };
 
 #endif

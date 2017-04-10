@@ -7,7 +7,7 @@
 
 class iTestowany{
 public:
-	virtual	void wykonaj_test()=0;		//rozpoczecie procedury testowej	
+	virtual	void wykonaj_test(int ilosc)=0;		//rozpoczecie procedury testowej	
 };
 
 #endif

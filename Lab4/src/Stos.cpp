@@ -5,41 +5,28 @@
 
 using namespace std;	
 
-Stos::Stos(){  						//konstruktor
-	ROZMIAR = 0;
+Stos::Stos(int rozmiar){  						//konstruktor
+	ROZMIAR = rozmiar;
+	GORNY = 0;
 	MOJ_STOS = new int [ROZMIAR];
 }
 
-///////////////////////////////////////////////////////////////////
-void Stos::push(){   //dodaje element na gore stosu	
 
- 	ROZMIAR++;
- 	int *NOWY_STOS = new int [ROZMIAR];
-	 	
- 	for (int i = 0; i < ROZMIAR-1; ++i){
- 		NOWY_STOS[i] = MOJ_STOS[i];
- 	}
- 	delete [] MOJ_STOS;
-      
-    MOJ_STOS = NOWY_STOS;
-	MOJ_STOS[ROZMIAR-1]=ROZMIAR; // np element 5 stosu = 5
+///////////////////////////////////////////////////////////////////
+void Stos::push(int wartosc){   //dodaje element na gore stosu	
+
+	if (GORNY <= ROZMIAR){
+		MOJ_STOS[GORNY++]=wartosc;
+	}
+
 }
 
 
 ///////////////////////////////////////////////////////////////
 void Stos::pop(){	 //usuwa element z gory stosu
     
-    if (ROZMIAR>0){
-        int *NOWY_STOS = new int [ROZMIAR-1];
-	 	
-	 	for (int i = 0; i < ROZMIAR-1; ++i){
-	 		NOWY_STOS[i] = MOJ_STOS[i];
-	 	}
-
-	 	delete [] MOJ_STOS;
-        
-        MOJ_STOS = NOWY_STOS;
-        ROZMIAR--;
+    if (GORNY != 0){
+		GORNY--;
     }
     else{
         cout << "Stos pusty!";
@@ -49,55 +36,52 @@ void Stos::pop(){	 //usuwa element z gory stosu
 
 ////////////////////////////////////////////////////////////////////
 void Stos::size(){				 			//wyswietla aktalny rozmiar stosu
-	cout << "\nW stosie znajduje sie  "<<ROZMIAR<<" elementow"<<endl;
+	cout << "\nW stosie znajduje sie  "<<GORNY<<" elementow"<<endl;
 }
 
 
 ////////////////////////////////////////////////////////////////////
 void Stos::show(){							//wyswietla stos
-	cout << "Kolejne elementy stosu to : "<<endl;
-	for(int i=0 ; i < ROZMIAR ; i++){
+	cout << "\nKolejne elementy stosu to : "<<endl;
+	for(int i=0 ; i<= GORNY ; i++){
 		cout << MOJ_STOS[i] << " ";
 	}
 }
 
-
-///////////////////////////////////////////////////////////////////
-void Stos::find(int Szukana){
-	if (MOJ_STOS[ROZMIAR-1]==Szukana){
-		cout << "Wartosc zostala odnaleziona"<<endl;
+///////////////////////////////////////////////////////////////////////////
+int Stos::gorny() {
+	if (GORNY != 0) { //jeżeli są elementy na stosie
+		return MOJ_STOS[GORNY - 1]; //zwraca wartość górnego elementu stosu
 	}
-	else{
-		pop();
-		find(Szukana);
-	}
+	return -1;
 }
 
 
+//////////////////////////////////////////////////////////////////////////
+void Stos::find(int Szukana) {
+	int ile_this = this->GORNY; 
+	Stos *POMOCNY = new Stos(this->ROZMIAR); 
+
+	for (int i = 1; i <= ile_this; i++) {
+		POMOCNY->push(this->gorny()); 
+		this->pop();		
+		if (POMOCNY->gorny() == Szukana) { 
+			for (int j = POMOCNY->ROZMIAR; j > 0; j--) { 
+				this->push(POMOCNY->gorny());
+				POMOCNY->pop();
+			}
+		}
+	}
+}
+
 ////////////////////////////////////////////////////////////////
-void Stos::wykonaj_test(){			//procedura testowa
-
-	int ile_wpisac = 100000;
-	//int poszukiwana;
-
-	//cout << "\nWitaj, oto test dla typu STOS";
-	//cout << "\nPodaj ile wpisac do stosu  ";
-	//cin >> ile_wpisac;
-	
-	for (int i = 0; i < ile_wpisac; ++i)
-	{
-		push();
+void Stos::wykonaj_test(int ilosc){			//procedura testowa
+	push(1);
+	for (int i = 1; i < ilosc; ++i){
+		push(i+1);
 	}
 
-	size();
-
-	//show();
-
-	//cout << "\nJakiej wartosci szukasz? :"<<endl;
-	//cin >> poszukiwana ;
-	//find(poszukiwana);
 	find(1);
 
-	size();
 }			 
 
